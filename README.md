@@ -1,1 +1,2 @@
-# netflix-gpt installed cra
+#Netflix-gpt
+ Installed netflix-gpt cra
