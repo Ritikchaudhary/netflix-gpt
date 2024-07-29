@@ -1,11 +1,12 @@
-import './App.css';
+import React from 'react'
+import Body from "./Component/Body"
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1 className="text-black mx-4 my-4">Hello World</h1>
+    <div>
+      <Body/>
     </div>
-  );
+  )
 }
 
 export default App;
