@@ -8,15 +8,15 @@ const Body = ()=>{
     const AppRouter = createBrowserRouter([
         {
             path: "/",
-            element: <Login/>
+            element: <Signup/>
         },
         {
             path: "/browse",
             element: <Browse/>
         },
         {
-            path: "/signup",
-            element: <Signup/>
+            path: "/login",
+            element: <Login/>
         }
     ]);
 
