@@ -2,6 +2,8 @@ import Header from "./Header";
 import {useState} from "react"
 import { useRef } from "react";
 import { validateData } from "../Utils/validateForm";
+import { auth } from "../Utils/firebase";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 
 
 const Login = ()=>{
@@ -21,6 +23,31 @@ const Login = ()=>{
         
         const message = validateData(name?.current?.value, email?.current?.value, password?.current?.value);
         setErrorMessage(message);
+
+        if(message) return;
+
+        if(!isSigninForm){
+          createUserWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
+            .then((userCredential) => { 
+                const user = userCredential.user;
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMessage(errorMessage);
+            });
+        }
+        else{
+            signInWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(errorMessage);
+                });
+        }
     };
 
 
