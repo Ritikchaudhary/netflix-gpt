@@ -5,6 +5,7 @@
 # Features
 - Login/ SignUp
   - Login/SignUp Form
+  - firebase Authentication to Login/SignUp form
   - redirect to browse page  
 - Browse(after authentication)
   - Header
