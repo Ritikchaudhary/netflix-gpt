@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom"
 
 const Browse = ()=>{
     const navigate = useNavigate();
-
+    
     const handlelogout = ()=>{
         signOut(auth).then(() => {
             navigate("/login");

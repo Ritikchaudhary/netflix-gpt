@@ -5,12 +5,16 @@ import { validateData } from "../Utils/validateForm";
 import { auth } from "../Utils/firebase";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import {useNavigate} from "react-router-dom"
+import { updateProfile } from "firebase/auth";
+import {addUser} from "../Utils/userSlice"
+import {useDispatch} from "react-redux"
 
 
 const Login = ()=>{
 
     const [isSigninForm, setIsSigninForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const name = useRef(null);
@@ -32,7 +36,15 @@ const Login = ()=>{
           createUserWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
             .then((userCredential) => { 
                 const user = userCredential.user;
-                navigate("/browse");
+                updateProfile(user, {
+                    displayName: name?.current?.value,
+                  }).then(() => {
+                    const {uid, email, displayName} = auth.currentUser;
+                    dispatch(addUser({uid: uid, email: email, displayName: displayName}));
+                    navigate("/browse");
+                  }).catch((error) => {
+                    // An error occurred
+                  });
             })
             .catch((error) => {
                 const errorCode = error.code;
