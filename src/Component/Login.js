@@ -1,18 +1,18 @@
-import Header from "./Header";
+import Header from "./Header"
 import {useState} from "react"
-import { useRef } from "react";
-import { validateData } from "../Utils/validateForm";
-import { auth } from "../Utils/firebase";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { useRef } from "react"
+import { validateData } from "../Utils/validateForm"
+import { auth } from "../Utils/firebase"
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth"
 import {useNavigate} from "react-router-dom"
-import { updateProfile } from "firebase/auth";
+import { updateProfile } from "firebase/auth"
 import {addUser} from "../Utils/userSlice"
 import {useDispatch} from "react-redux"
 import {BG_IMG} from "../Utils/constants"
 
 
 const Login = ()=>{
-
+    
     const [isSigninForm, setIsSigninForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
     const dispatch = useDispatch();
