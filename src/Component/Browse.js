@@ -3,11 +3,17 @@ import useHandleLogout from "../hooks/useHandleLogout"
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies"
 import MainContainer from "./MainContainer"
 import SecondaryContainer from "./SecondaryContainer"
+import useUpcomingMovies from "../hooks/useUpcomingMovies"
+import useTopRatedMovies from "../hooks/useTopRatedMovies"
+import usePopularMovies from "../hooks/usePopularMovies"
 
 const Browse = ()=>{
     const handlelogout = useHandleLogout();
 
     useNowPlayingMovies();
+    useUpcomingMovies();
+    useTopRatedMovies();
+    usePopularMovies();
 
     return (
         <div className="overflow-x-hidden">
