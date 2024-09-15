@@ -6,7 +6,9 @@ const GPTSearchPage = ()=>{
         <div>
             <GPTSearchBar/>
             <div className="absolute -z-10 top-0">
-                <img src={BG_IMG} alt="bgimage" className="h-screen w-screen"/>
+                <img src={BG_IMG} 
+                    alt="bgimage" 
+                    className="h-screen w-screen"/>
             </div>
         </div>
     )
