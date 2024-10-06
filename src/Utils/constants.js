@@ -20,4 +20,4 @@ export const SUPPORTED_LANG = [
     {identifier: "kannada", name: "Kannada"},
 ]
 
-export const OPENAI_KEY ="sk-gWOrPFG5ccCFM_roJvWnf8OSd2-ZuYRVzLxzcsnBNTT3BlbkFJdTi1sFlFZxACCdVoOHhKYygVVxNJCJC7LyNfO2tq8A";
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
