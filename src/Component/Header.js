@@ -1,6 +1,6 @@
 import { auth } from "../Utils/firebase"
 import { onAuthStateChanged } from "firebase/auth"
-import {useEffect} from "react"
+import {useEffect, useState} from "react"
 import {useDispatch} from "react-redux"
 import {addUser, removeUser} from "../Utils/userSlice"
 import { useNavigate } from "react-router-dom"
@@ -13,7 +13,7 @@ import { languageToggle } from "../Utils/langSlice"
 import useHandleLogout from "../hooks/useHandleLogout"
 
 const Header = ()=>{
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const toggleState = useSelector(store => store.gpt.toggleState);
@@ -35,6 +35,7 @@ const Header = ()=>{
               const {uid, email, displayName} = user;
               dispatch(addUser({uid: uid, email: email, displayName: displayName}));
               navigate("/browse");
+              setIsLoggedIn(!isLoggedIn);
             } else {
               dispatch(removeUser());
               navigate("/login");
@@ -50,20 +51,20 @@ const Header = ()=>{
                 alt="Logo"
             />
             <div className="flex absolute space-x-4 top-16 ml-[25%] md:right-16 md:top-6 z-10">
-                    {toggleState && <select className="text-white rounded-sm px-4 py-2 bg-gray-900 opacity-100" onChange={handlelanguagechange}>
+                    {toggleState && isLoggedIn && <select className="text-white rounded-sm px-4 py-2 bg-gray-900 opacity-100" onChange={handlelanguagechange}>
                             {
                                 SUPPORTED_LANG.map(lang => <option key={lang.identifier} value={lang.identifier}>{lang.name}</option> )
                             }
                     </select>}
 
-                    <button onClick={handleClickGPTSearchPage}
+                    {isLoggedIn && <button onClick={handleClickGPTSearchPage}
                         className="text-white font-bold bg-orange-500 rounded-sm py-2 px-4 cursor-pointer hover:opacity-85">
                             {toggleState ? lang[currLang].home : "Ask GPT"}
-                    </button>
-                    <button onClick={handlelogout} 
+                    </button>}
+                    {isLoggedIn && <button onClick={handlelogout} 
                         className="text-white font-bold py-2 px-4 bg-red-600 rounded-sm cursor-pointer hover:opacity-85">
                         {toggleState ? lang[currLang].logout : "Logout"}
-                    </button>
+                    </button>}
                 </div>
         </div>
     )
